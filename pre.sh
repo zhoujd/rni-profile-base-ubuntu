@@ -279,6 +279,11 @@ elif [ -d /sys/block/[vsh]da ]; then
 	export BOOT_PARTITION=${DRIVE}1
 	export SWAP_PARTITION=${DRIVE}2
 	export ROOT_PARTITION=${DRIVE}3
+elif [ -d /sys/block/[vh]da ]; then
+	export DRIVE=$(echo /dev/`ls -l /sys/block/[vh]da | grep -v usb | head -n1 | sed 's/^.*\([vh]d[a-z]\+\).*$/\1/'`);
+	export BOOT_PARTITION=${DRIVE}1
+	export SWAP_PARTITION=${DRIVE}2
+	export ROOT_PARTITION=${DRIVE}3
 elif [ -d /sys/block/mmcblk[0-9] ]; then
 	export DRIVE=$(echo /dev/`ls -l /sys/block/mmcblk[0-9] | grep -v usb | head -n1 | sed 's/^.*\(mmcblk[0-9]\+\).*$/\1/'`);
 	export BOOT_PARTITION=${DRIVE}p1
